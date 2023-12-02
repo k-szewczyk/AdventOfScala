@@ -5,7 +5,6 @@ import scala.None
 object day1 extends Task {
   val year = 2023
 
-  @main
   override def main(): Unit = super.main()
 
   def part1(fileContent: List[String]): Int = {

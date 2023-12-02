@@ -9,7 +9,10 @@ trait Task {
     val day = getClass.getName.split('.').last.replace("$", "")
     Using(Source.fromResource(s"${year}/${day}p1.txt")) { file =>
       Console.println(part1(file.getLines().toList).toString)
-    }
+    } match
+      case Failure(exception) => print(exception.toString)
+      case Success(value) => value
+
     Using(Source.fromResource(s"${year}/${day}p2.txt")) { file =>
       Console.println(part2(file.getLines().toList).toString)
     } match
