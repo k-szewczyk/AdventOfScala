@@ -7,13 +7,13 @@ object day1 extends Task {
 
   override def main(): Unit = super.main()
 
-  def part1(fileContent: List[String]): Int = {
+  def part1(fileContent: Iterator[String]): Int = {
     fileContent.map { line =>
       extractDigits(line)
     }.sum
   }
 
-  def part2(fileContent: List[String]): Int = {
+  def part2(fileContent: Iterator[String]): Int = {
     val digitWords: Seq[(String, String)] = Seq("one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
       .zipWithIndex.map((numStr, idx) => numStr -> (idx + 1).toString)
     val letters = fileContent.map { line =>

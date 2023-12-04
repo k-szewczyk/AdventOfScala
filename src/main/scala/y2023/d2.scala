@@ -27,6 +27,7 @@ object day2 extends Task {
       case "green" => Green
       case "blue" => Blue
     Roll(color, count)
+
   def parseInput(line: String): Game = {
     val gameNr = gameRegex.findAllMatchIn(line)
       .map(x => Integer.parseInt(x.group("GameNr")))
@@ -69,7 +70,7 @@ object day2 extends Task {
       .values.product
   }
 
-  def part1(fileContent: List[String]): Int = {
+  def part1(fileContent: Iterator[String]): Int = {
     fileContent
       .map(parseInput)
       .filter(solvep1)
@@ -77,7 +78,7 @@ object day2 extends Task {
       .sum
   }
 
-  def part2(fileContent: List[String]): Int = {
+  def part2(fileContent: Iterator[String]): Int = {
     fileContent
       .map(parseInput)
       .map(solvep2)

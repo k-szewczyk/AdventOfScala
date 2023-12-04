@@ -8,17 +8,17 @@ trait Task {
   def main(): Unit = {
     val day = getClass.getName.split('.').last.replace("$", "")
     Using(Source.fromResource(s"${year}/${day}p1.txt")) { file =>
-      Console.println(part1(file.getLines().toList).toString)
+      Console.println(part1(file.getLines()).toString)
     } match
       case Failure(exception) => print(exception.toString)
       case Success(value) => value
 
     Using(Source.fromResource(s"${year}/${day}p2.txt")) { file =>
-      Console.println(part2(file.getLines().toList).toString)
+      Console.println(part2(file.getLines()).toString)
     } match
       case Failure(exception) => print(exception.toString)
       case Success(value) => value
   }
-  def part1(value: List[String]): Any
-  def part2(value: List[String]): Any
+  def part1(value: Iterator[String]): Any
+  def part2(value: Iterator[String]): Any
 }

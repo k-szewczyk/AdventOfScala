@@ -3,21 +3,20 @@ package y2023
 object day3 extends Task {
   val year = 2023
 
-  @main
   override def main(): Unit = super.main()
 
   case class PartNumber(line: Int, startPos: Int, number: Int) {
 
-    def getNeighbourhood(lines: List[String]) = lines.slice(line - 1, line + 2)
+    def getNeighbourhood(lines: Iterator[String]) = lines.toVector.slice(line - 1, line + 2)
       .map(_.slice(startPos - 1, startPos + number.toString.length + 1))
 
-    def hasSpecialSignAdjacent(lines: List[String]): Boolean = {
+    def hasSpecialSignAdjacent(lines: Iterator[String]): Boolean = {
       getNeighbourhood(lines)
         .map(_.replaceAll("\\d+", "").replace(".", "").replaceAll("\\s", ""))
         .exists(_.nonEmpty)
     }
 
-    def isConnectedToGear(lines: List[String]): Boolean = {
+    def isConnectedToGear(lines: Iterator[String]): Boolean = {
       getNeighbourhood(lines)
         .exists(_.contains("*"))
     }
@@ -31,8 +30,9 @@ object day3 extends Task {
     }
   }
 
-  def getNumbers(lines: List[String]): Seq[PartNumber] = {
+  def getNumbers(lines: Iterator[String]): Seq[PartNumber] = {
     lines
+      .toVector
       .zipWithIndex
       .flatMap { case (str, i) =>
         var mem = 0
@@ -47,8 +47,9 @@ object day3 extends Task {
       }
   }
 
-  def getSpecialCharctersPositions(lines: List[String]): Seq[Gear] = {
+  def getSpecialCharctersPositions(lines: Iterator[String]): Seq[Gear] = {
     lines
+      .toVector
       .zipWithIndex
       .flatMap { case (str, i) =>
         var mem = 0
@@ -63,13 +64,13 @@ object day3 extends Task {
   }
 
 
-  override def part1(value: List[String]): Any = {
+  override def part1(value: Iterator[String]): Any = {
     getNumbers(value)
       .filter(_.hasSpecialSignAdjacent(value))
       .map(_.number)
       .sum
   }
-  override def part2(value: List[String]): Any =  {
+  override def part2(value: Iterator[String]): Any =  {
     val numbers = getNumbers(value)
     val gears = getSpecialCharctersPositions(value)
     gears.map(_.getAdjancedNumbers(numbers))
