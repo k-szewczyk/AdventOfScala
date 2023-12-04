@@ -15,7 +15,6 @@ case class Game(number: Int, subsets: Seq[Subset])
 object day2 extends Task {
   val year = 2023
 
-  @main
   override def main(): Unit = super.main()
   val part1EdgeCase: Map[Color, Int] = Map(Red -> 12, Green -> 13, Blue -> 14)
 
